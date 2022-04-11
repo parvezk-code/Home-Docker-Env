@@ -1,0 +1,24 @@
+#!/bin/bash
+
+createLogFile () {
+
+	if [ ! -f "$LOG_FILE" ]; then
+		touch $LOG_FILE
+		return 0;
+	fi
+
+	fileSize="$(wc -c <"$LOG_FILE")"
+	if [ $fileSize -lt 10000 ]; then
+		touch $LOG_FILE
+	fi
+}
+
+function exec_docker () {
+	dir_mapped_in_container="${PWD/$HOME/"$CONTAINER_HOME"}"
+	docker-compose --file "$2" up -d "$1" 2>> $LOG_FILE
+	docker-compose --file $2 exec -w ${dir_mapped_in_container} $1  $3  $4  
+}
+
+
+createLogFile
+

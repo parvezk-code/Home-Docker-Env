@@ -36,7 +36,6 @@ services:   #https://www.bezkoder.com/docker-mern/
     # docker-compose exec git /bin/sh
     # docker-compose up -d git
 
-
   node16:
     image: node:16-bullseye
     container_name: node16
@@ -47,3 +46,111 @@ services:   #https://www.bezkoder.com/docker-mern/
       - $HOME:/home/newuser
     # docker-compose exec node16 /bin/sh
     # docker-compose up -d node16
+
+  python10:
+    image: ${PYTHON_IMAGE}
+    command: ["tail", "-F", "anything"]
+    container_name: ${PYTHON_SERVICE_NAME}
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - $HOME:/root
+      - $HOME/.Xauthority:$HOME/.Xauthority:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+
+  gcc11:
+    image: ${GCC_IMAGE}
+    command: ["tail", "-F", "anything"]
+    container_name: ${GCC_SERVICE_NAME}
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - $HOME:/root
+      - $HOME/.Xauthority:$HOME/.Xauthority:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+
+  java17:
+    image: ${JAVA_IMAGE}
+    command: ["tail", "-F", "anything"]
+    container_name: ${JAVA_SERVICE_NAME}
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - $HOME:/root
+      - $HOME/.Xauthority:$HOME/.Xauthority:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+
+  apache:
+    image: php:7.2-apache
+    container_name: server
+    restart: 'always'
+    ports:
+      - '9000:80'
+    volumes:
+      - $HOME/cse/code/apache/php/p1:/var/www/html
+      - $HOME/cse/code/apache/logs:/var/log/apache2 
+      #- $HOME/cse/code/apache/php/php.ini:/usr/local/etc/php/php.ini'
+    #depends_on:
+      #- mariadb
+  
+  mariadb:
+    image: mariadb:10.7.3-focal
+    container_name: mdb
+    entrypoint: custom-docker-entrypoint.sh
+    command: ["mariadbd", "--user=root"]
+    #user: root
+    networks:
+      default:
+        aliases:
+          - db
+    restart: 'always'
+    volumes: 
+      - .$HOME/cse/code/mariadb/db_dir:/var/lib/mysql 
+      - ./config_files/mariadb/custom-docker-entrypoint.sh:/usr/local/bin/custom-docker-entrypoint.sh
+    environment:
+      TZ: "Asia/Kolkata"
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "cse_db"
+      MYSQL_USER: "cse"
+      MYSQL_PASSWORD: "password"
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: 'always'
+    ports:
+      - '9001:8080'
+    #depends_on:
+      #- mariadb
+
+#xhost +
+#docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix 
+
+# Libre Office AppImage: https://www.libreoffice.org/download/appimage/
+
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    restart: 'always'
+    volumes: 
+      - /run/user/1000/docker.sock:/var/run/docker.sock
+      - $HOME/cse/code/portainer/data:/data
+    ports:
+      - '9002:8000'
+      - '9003:9000'  #http://localhost:9003'
+
+  vscodeserver:
+    image: codercom/code-server:latest   #gitpod/openvscode-server
+    container_name: vscodeserversh
+    #user: "$(id -u):$(id -g)"
+    restart: 'always'
+    init: true
+    volumes:
+      - $HOME/cse/code/vscodeserver/project:/home/coder/project
+      - $HOME/cse/code/vscodeserver/.config:/home/coder/.config
+    environment:
+      DOCKER_USER: $USER
+    ports:
+      - '9004:8000'
+
+#--cap-add SYS_ADMIN --cap-add MKNOD --device /dev/fuse:mrw
