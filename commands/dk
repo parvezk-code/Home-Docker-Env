@@ -1,0 +1,34 @@
+#!/bin/bash
+
+CUREENT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
+PARENT_DIR="$(dirname "$CUREENT_DIR")"
+
+COMPOSE_FILE=$PARENT_DIR/docker-compose.yml
+source $PARENT_DIR/.env
+source $CUREENT_DIR/docker_services
+
+function testThisScript () {
+    echo  $CUREENT_DIR
+    echo  $PARENT_DIR
+    echo  $PARENT_DIR/.env
+    echo  $COMPOSE_FILE
+    echo "${PWD/$HOME/"$CONTAINER_HOME"}"
+    echo  $LOG_FILE
+}
+
+
+
+if [ "$1" = "start" ]; then
+    start_docker $2 $COMPOSE_FILE
+elif [ "$1" = "stop" ]; then
+    stop_docker $2 $COMPOSE_FILE
+elif [ "$1" = "restart" ]; then
+    restart_docker $2 $COMPOSE_FILE
+elif [ "$1" = "help" ]; then
+    echo "$NPM_SERVICE_NAME $APACHE_SERVICE_NAME $MARIADB_SERVICE_NAME $ADMINER_SERVICE_NAME $MONGODB_SERVICE_NAME $MONGO_ADMIN_SERVICE_NAME $PYTHON_SERVICE_NAME $GCC_SERVICE_NAME $JAVA_SERVICE_NAME $GIT_SERVICE_NAME"
+else
+    echo "invalid command. valid options are --> start, stop, restart"
+fi
+
+#exec_docker $GCC_SERVICE_NAME $COMPOSE_FILE gcc "$@"
+
