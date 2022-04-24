@@ -1,0 +1,12 @@
+# Libre Office AppImage          : https://www.libreoffice.org/download/appimage/
+# VS-Codium AppImage             : https://github.com/VSCodium/vscodium/releases
+# diagrams.net AppImage          : https://github.com/jgraph/drawio-desktop/releases/tag/v17.4.2  
+#                                  https://www.diagrams.net/blog/diagrams-offline
+# shotcut video editor AppImage  : https://github.com/mltframework/shotcut/releases/
+# Audacity audio editor AppImage : https://www.audacityteam.org/download/linux/
+# xournalpp xournal++ AppImage   : https://github.com/xournalpp/xournalpp/releases
+# App Images                     : https://github.com/probonopd   (zoom, geany, vlc )
+# App Images                     : https://appimage.github.io/apps/ 
+# FreeIPA server Docker Image    : https://hub.docker.com/r/freeipa/freeipa-server/ 
+# Docker desktop Linux           : https://docs.docker.com/desktop/linux/ 
+# DNS Server Bind Docker Image   : https://hub.docker.com/r/ubuntu/bind9
