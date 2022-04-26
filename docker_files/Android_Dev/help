@@ -1,0 +1,51 @@
+# setup your Android Development Environment, without Android Studio.
+# https://docs.flutter.dev/get-started/install/linux 
+
+# Flutter dependencies : bash, curl, file, git 2.x, mkdir, rm, zip, unzip, which, xz-utils, libglu1-mesa
+
+# Installing Flutter
+git clone https://github.com/flutter/flutter.git -b stable
+
+# flutter is requiring java-8-openjdk to accepting the licenses from the android SDK
+
+# Setting Flutter Path $HOME/.bashrc  $HOME/.profile
+export PATH=/home/newuser/zz_mydata/zz_my/study/projects/android/flutter/bin:$PATH
+
+# run this command (need android sdk for this)
+flutter doctor --android-licenses
+
+# sdk-tools is deprecated. Use latest commandlinetools-linux 
+
+wget -O commandlinetools.zip  https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+
+unzip commandlinetools.zip 
+
+mkdir latest
+
+mv ./cmdline-tools/* ./latest/
+
+mv ./latest ./cmdline-tools/latest
+
+cd ./cmdline-tools/latest/bin
+
+yes | ./sdkmanager --licenses
+
+# to list all package versions
+./sdkmanager --list
+
+./sdkmanager "platform-tools"
+./sdkmanager "platforms;android-30"
+./sdkmanager "build-tools;30.0.3"
+
+# following are optional
+./sdkmanager "sources;android-30"
+./sdkmanager "ndk;24.0.8215888"
+./sdkmanager "patcher;v4"
+./sdkmanager "emulator"
+
+# run this command (need android sdk for this)
+flutter doctor --android-licenses
+
+
+
+
