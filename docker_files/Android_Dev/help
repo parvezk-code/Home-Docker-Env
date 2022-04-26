@@ -36,6 +36,7 @@ yes | ./sdkmanager --licenses
 ./sdkmanager "platform-tools"
 ./sdkmanager "platforms;android-30"
 ./sdkmanager "build-tools;30.0.3"
+./sdkmanager "system-images;android-30;google_apis_playstore;x86"
 
 # following are optional
 ./sdkmanager "sources;android-30"
@@ -45,6 +46,37 @@ yes | ./sdkmanager --licenses
 
 # run this command (need android sdk for this)
 flutter doctor --android-licenses
+
+# No suitable Android AVD system images are available. You may need to install these using sdkmanager, # for example: sdkmanager "system-images;android-27;google_apis_playstore;x86"
+
+# https://developer.android.com/studio/run/device
+# https://developer.android.com/studio/run/device#connect
+# Add your mobile to usb port of PC
+# on your mobile phone enable developer mode
+#         go to ---> setting---> about ---> build no. (tab 7 times)
+#		  go to ---> settings--> developers option --> enable option USB debugging
+
+
+cd android_sdk/platform-tools/
+./adb devices   #this will list your mobile device.
+#       error : no permissions (missing udev rules? user is in the plugdev group
+
+# add user to plugdev group
+sudo usermod -aG plugdev $LOGNAME
+
+# copy vid/pid from above command output.  vid=0e8d and pid=201c
+lsusb | grep  moto   # Bus 003 Device 002: ID 0e8d:201c MediaTek Inc. moto e(6s)
+
+
+
+# Now create a udev rule inside /etc/udev/rules.d/51-android.rules
+# SUBSYSTEM=="usb", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="201c", MODE="0666", GROUP="plugdev"
+sudo gedit /etc/udev/rules.d/51-android.rules
+sudo udevadm control --reload-rules
+
+# unplug the mobile from PC and re-connect it.
+# allow key prompt in the mobile device.
+
 
 
 
