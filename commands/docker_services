@@ -20,6 +20,7 @@ function setParams () {
 	params=''
 	args=("$@") 
 	ELEMENTS=${#args[@]}
+	echo $ELEMENTS
 	for (( i=3;i<$ELEMENTS;i++)); do 
     	#echo ${args[${i}]} 
     	params+=${args[${i}]}
@@ -31,9 +32,9 @@ function exec_docker () {
 	createLogFile
 	dir_mapped_in_container="${PWD/$HOME/"$CONTAINER_HOME"}"
 	docker-compose --file "$2" up -d "$1" 2>> $LOG_FILE
-	setParams "$@"
-	echo $params
-	docker-compose --file $2 exec -w ${dir_mapped_in_container} $1  $3  $params
+	#setParams "$@"
+	#echo $4
+	docker-compose --file $2 exec -w ${dir_mapped_in_container} $1  $3  $4
 }
 
 function start_docker () {
