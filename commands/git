@@ -3,7 +3,7 @@
 CUREENT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
 PARENT_DIR="$(dirname "$CUREENT_DIR")"
 
-COMPOSE_FILE=$PARENT_DIR/docker-compose.yml 
+COMPOSE_FILE=$PARENT_DIR/docker-compose.yml
 source $PARENT_DIR/.env
 source $CUREENT_DIR/docker_services
 
