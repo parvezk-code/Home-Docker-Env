@@ -15,8 +15,4 @@ function testThisScript () {
     echo "${PWD/$HOME/"$CONTAINER_HOME"}"
     echo  $LOG_FILE
 }
-#for i in "$*"; do echo "$i"; done;
-declare -A params
-params["key"]="$@" 
-exec_docker $GIT_SERVICE_NAME $COMPOSE_FILE git "${params[@]}"
-
+exec_docker $GIT_SERVICE_NAME $COMPOSE_FILE git "$@"
