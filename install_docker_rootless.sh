@@ -31,11 +31,27 @@ cmd3=$?
 
 if [ $cmd2 -eq 0 ] || [ $cmd3 -eq 0 ]; then
     echo "Docker already installed"
-  else
+else
     echo "----------------installing rootless docker-------------------"
     curl -o $rootlessScriptName -fsSL $rootlessScriptURl
     #wget -O $rootlessScriptName  $rootlessScriptURl
     sh $rootlessScriptName
+
+    echo " " >> $HOME/.bashrc
+	echo "# following line is added for rootless docker setup">> $HOME/.bashrc
     echo $dockerBinExport >> ~/.bashrc
 	echo $dockerHostExport >> ~/.bashrc
+
+    echo " " >> $HOME/.profile
+	echo "# following line is added for rootless docker setup">> $HOME/.profile
+    echo $dockerBinExport >> ~/.profile
+    echo $dockerHostExport >> ~/.profile
+
+    echo "----------------installing docker-compose -------------------"
+    COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
+    curl -L "https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o $HOME/bin/docker-compose
+    chmod a+x $HOME/bin/docker-compose
+    docker-compose -v
+
 fi
+

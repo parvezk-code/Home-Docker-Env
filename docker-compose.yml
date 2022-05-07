@@ -109,6 +109,7 @@ services:   #https://www.bezkoder.com/docker-mern/
       - ${NODE_PORT3}:7003
       - ${NODE_PORT4}:7004
 
+# git config --global http.sslverify "false"
   git:
     image: ${GIT_IMAGE}
     container_name: ${GIT_SERVICE_NAME}
@@ -116,6 +117,8 @@ services:   #https://www.bezkoder.com/docker-mern/
     command: ["tail", "-F", "anything"]
     volumes:
       - $HOME:/root
+      - ./config_files/git/resolv.conf:/etc/resolv.conf
+    network_mode: host
 
 volumes:
   mariadb-data:
