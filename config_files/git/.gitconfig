@@ -6,3 +6,7 @@
 [user]
 	name = parvezk-code
 	email = epost.parvez@gmail.com
+
+[credential]
+    helper = store --file /root/.git-credentials
+    helper = cache --timeout 30000
