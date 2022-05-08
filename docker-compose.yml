@@ -115,9 +115,13 @@ services:   #https://www.bezkoder.com/docker-mern/
     container_name: ${GIT_SERVICE_NAME}
     entrypoint: []
     command: ["tail", "-F", "anything"]
+    environment:
+      - DISPLAY=${DISPLAY}
     volumes:
       - $HOME:$GIT_CONTAINER_HOME
       - ./config_files/git/resolv.conf:/etc/resolv.conf
+      - ./config_files/git/.gitconfig:/root/.gitconfig
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
     network_mode: host
 
 volumes:
