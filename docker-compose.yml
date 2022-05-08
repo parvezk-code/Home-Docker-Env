@@ -116,7 +116,7 @@ services:   #https://www.bezkoder.com/docker-mern/
     entrypoint: []
     command: ["tail", "-F", "anything"]
     volumes:
-      - $HOME:/root
+      - $HOME:$GIT_CONTAINER_HOME
       - ./config_files/git/resolv.conf:/etc/resolv.conf
     network_mode: host
 

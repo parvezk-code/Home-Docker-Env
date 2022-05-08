@@ -16,10 +16,10 @@ createLogFile () {
 
 function exec_docker () {
 	createLogFile
-	dir_mapped_in_container="${PWD/$HOME/"$CONTAINER_HOME"}"
+	dir_mapped_in_container="${PWD/$HOME/"$3"}"
 	docker-compose --file "$2" up -d "$1" 2>> $LOG_FILE
 	#echo "${@:4}"
-	docker-compose --file $2 exec -w ${dir_mapped_in_container} $1  $3  "${@:4}"
+	docker-compose --file $2 exec -w ${dir_mapped_in_container} $1  $4  "${@:5}"
 }
 
 function start_docker () {

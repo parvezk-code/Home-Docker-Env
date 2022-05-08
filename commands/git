@@ -15,4 +15,4 @@ function testThisScript () {
     echo "${PWD/$HOME/"$CONTAINER_HOME"}"
     echo  $LOG_FILE
 }
-exec_docker $GIT_SERVICE_NAME $COMPOSE_FILE git "$@"
+exec_docker $GIT_SERVICE_NAME $COMPOSE_FILE $GIT_CONTAINER_HOME git "$@"
