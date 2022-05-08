@@ -16,5 +16,5 @@ function testThisScript () {
     echo  $LOG_FILE
 }
 
-exec_docker $GCC_SERVICE_NAME $COMPOSE_FILE gcc "$@"
+exec_docker $GCC_SERVICE_NAME $COMPOSE_FILE $CONTAINER_HOME gcc "$@"
 

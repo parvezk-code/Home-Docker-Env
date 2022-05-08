@@ -16,5 +16,5 @@ function testThisScript () {
     echo  $LOG_FILE
 }
 
-exec_docker $NPM_SERVICE_NAME $COMPOSE_FILE npm "$@"
+exec_docker $NPM_SERVICE_NAME $COMPOSE_FILE $CONTAINER_HOME npm "$@"
 

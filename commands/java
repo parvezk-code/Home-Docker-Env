@@ -16,5 +16,5 @@ function testThisScript () {
     echo  $LOG_FILE
 }
 
-exec_docker $JAVA_SERVICE_NAME $COMPOSE_FILE java "$@"
+exec_docker $JAVA_SERVICE_NAME $COMPOSE_FILE $CONTAINER_HOME java "$@"
 
