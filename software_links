@@ -1,6 +1,6 @@
 # Libre Office AppImage          : https://www.libreoffice.org/download/appimage/
 # VS-Codium AppImage             : https://github.com/VSCodium/vscodium/releases
-# diagrams.net AppImage          : https://github.com/jgraph/drawio-desktop/releases/tag/v17.4.2  
+# diagrams.net AppImage          : https://github.com/jgraph/drawio-desktop/releases  
 #                                  https://www.diagrams.net/blog/diagrams-offline
 # shotcut video editor AppImage  : https://github.com/mltframework/shotcut/releases/
 # Audacity audio editor AppImage : https://www.audacityteam.org/download/linux/
@@ -11,4 +11,5 @@
 # Docker desktop Linux           : https://docs.docker.com/desktop/linux/ 
 # DNS Server Bind Docker Image   : https://hub.docker.com/r/ubuntu/bind9
 # Microsoft OneNote   Linux      : https://github.com/patrikx3/onenote/releases
+# Guitar git GUI AppImage        : https://github.com/soramimi/Guitar/releases/
 # packet tracer n/w emulator     :
