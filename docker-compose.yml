@@ -119,7 +119,8 @@ services:   #https://www.bezkoder.com/docker-mern/
     volumes:
       - $HOME:$GIT_CONTAINER_HOME
       - ./config_files/git/resolv.conf:/etc/resolv.conf
-      - ./config_files/git/.ssh:/root/.ssh
+      - ./config_files/git/.gitconfig:/root/.gitconfig
+      - $HOME/.ssh:/root/.ssh
     network_mode: host
 
 volumes:
