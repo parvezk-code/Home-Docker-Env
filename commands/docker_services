@@ -9,6 +9,7 @@ createLogFile () {
 
 	fileSize="$(du -sh  $LOG_FILE)"
 	arrIN=(${fileSize//./ })
+	arrIN=(${arrIN//K/ })
 	if [ "$arrIN" -gt "7" ]; then
 		echo "$(date)" > $LOG_FILE
 	fi
