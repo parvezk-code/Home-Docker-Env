@@ -9,7 +9,7 @@ services:   #https://www.bezkoder.com/docker-mern/
     environment:
       - DISPLAY=${DISPLAY}
     volumes:
-      - $HOME:/root
+      - $HOME:$PYTHON_CONTAINER_HOME
       - $HOME/.Xauthority:$HOME/.Xauthority:ro
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
 
@@ -20,7 +20,7 @@ services:   #https://www.bezkoder.com/docker-mern/
     environment:
       - DISPLAY=${DISPLAY}
     volumes:
-      - $HOME:/root
+      - $HOME:/$GCC_CONTAINER_HOME
       - $HOME/.Xauthority:$HOME/.Xauthority:ro
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
 
@@ -31,7 +31,7 @@ services:   #https://www.bezkoder.com/docker-mern/
     environment:
       - DISPLAY=${DISPLAY}
     volumes:
-      - $HOME:/root
+      - $HOME:$JAVA_CONTAINER_HOME
       - $HOME/.Xauthority:$HOME/.Xauthority:ro
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
 

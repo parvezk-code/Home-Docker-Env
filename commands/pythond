@@ -16,5 +16,5 @@ function testThisScript () {
     echo  $LOG_FILE
 }
 
-exec_docker $PYTHON_SERVICE_NAME $COMPOSE_FILE $CONTAINER_HOME python "$@"
+exec_docker $PYTHON_SERVICE_NAME $COMPOSE_FILE $PYTHON_CONTAINER_HOME python "$@"
 
