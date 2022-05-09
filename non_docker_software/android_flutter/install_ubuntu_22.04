@@ -1,5 +1,8 @@
 # setup your Android Development Environment, without Android Studio.
-# https://docs.flutter.dev/get-started/install/linux 
+# https://docs.flutter.dev/get-started/install/linux
+
+# this setup worked with openjdk:11, but failed with openjdk:17
+# openjdk:17 and gradel-6.7 version has compatibality issue
 
 # Installing Flutter
 git clone https://github.com/flutter/flutter.git -b stable
@@ -7,8 +10,8 @@ git clone https://github.com/flutter/flutter.git -b stable
 # Setting Flutter Path   $HOME/.bashrc    $HOME/.profile
 export PATH=/{flutter_dir_path}/bin:$PATH
 
-# run this command (need android sdk for this)
-flutter doctor --android-licenses
+# run this command 
+flutter doctor -v
 
 # sdk-tools is deprecated. Use latest commandlinetools-linux, version-8092744
 # https://developer.android.com/studio
@@ -73,18 +76,13 @@ cd android_sdk/platform-tools/
 ./adb devices   #this will list your mobile device.
 
 # Install flutter extension on codium(VS code OSS) to run flutter app.
+
 # From codium, select a emulator(AVD:android virtual device) to run the app.
+
+
 # You can create as many as AVDs as you want using command "avdmanager create" . 
 # ./avdmanager list avd
-
  
 
 # you can also run android application from command-line(cmd) 
 # https://developer.android.com/studio/build/building-cmdline 
-
-
-
-
-
-
-

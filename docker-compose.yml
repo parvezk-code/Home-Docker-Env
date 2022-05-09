@@ -24,7 +24,7 @@ services:   #https://www.bezkoder.com/docker-mern/
       - $HOME/.Xauthority:$HOME/.Xauthority:ro
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
 
-  java17:
+  java11:
     image: ${JAVA_IMAGE}
     command: ["tail", "-F", "anything"]
     container_name: ${JAVA_SERVICE_NAME}
@@ -32,6 +32,7 @@ services:   #https://www.bezkoder.com/docker-mern/
       - DISPLAY=${DISPLAY}
     volumes:
       - $HOME:$JAVA_CONTAINER_HOME
+      - $HOME:/root
       - $HOME/.Xauthority:$HOME/.Xauthority:ro
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
 
