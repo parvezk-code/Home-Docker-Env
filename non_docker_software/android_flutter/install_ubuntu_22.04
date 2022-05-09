@@ -1,0 +1,90 @@
+# setup your Android Development Environment, without Android Studio.
+# https://docs.flutter.dev/get-started/install/linux 
+
+# Installing Flutter
+git clone https://github.com/flutter/flutter.git -b stable
+
+# Setting Flutter Path   $HOME/.bashrc    $HOME/.profile
+export PATH=/{flutter_dir_path}/bin:$PATH
+
+# run this command (need android sdk for this)
+flutter doctor --android-licenses
+
+# sdk-tools is deprecated. Use latest commandlinetools-linux, version-8092744
+# https://developer.android.com/studio
+wget -O commandlinetools.zip  https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+
+unzip commandlinetools.zip 
+
+mkdir latest
+
+mv ./cmdline-tools/* ./latest/
+
+mv ./latest ./cmdline-tools/latest
+
+cd ./cmdline-tools/latest/bin
+
+./sdkmanager --licenses
+
+# to list all package versions
+./sdkmanager --list
+
+./sdkmanager "platform-tools"
+./sdkmanager "platforms;android-32"
+./sdkmanager "build-tools;32.0.0"
+./sdkmanager "system-images;android-32;google_apis_playstore;x86_64"
+
+# following are optional
+./sdkmanager "sources;android-30"
+./sdkmanager "ndk;24.0.8215888"
+./sdkmanager "patcher;v4"
+./sdkmanager "emulator"
+
+# run this command (need android sdk for this)
+flutter doctor --android-licenses
+
+# https://developer.android.com/studio/run/device
+# https://developer.android.com/studio/run/device#connect
+# Add your mobile to usb port of PC
+# on your mobile phone enable developer mode
+#         go to ---> setting---> about ---> build no. (tab 7 times)
+#		  go to ---> settings--> developers option --> enable option USB debugging
+
+
+cd android_sdk/platform-tools/
+./adb devices   #this will list your mobile device.
+#       error : no permissions (missing udev rules? user is in the plugdev group
+
+# add user to plugdev group
+sudo usermod -aG plugdev $LOGNAME
+
+# copy vid/pid from above command output.  vid=0e8d and pid=201c
+lsusb | grep  moto   # Bus 003 Device 002: ID 0e8d:201c MediaTek Inc. moto e(6s)
+
+# Now create a udev rule inside /etc/udev/rules.d/51-android.rules
+# SUBSYSTEM=="usb", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="201c", MODE="0666", GROUP="plugdev"
+sudo gedit /etc/udev/rules.d/51-android.rules
+sudo udevadm control --reload-rules
+
+# unplug the mobile from PC and re-connect it.
+# allow key prompt in the mobile device.
+
+cd android_sdk/platform-tools/
+./adb devices   #this will list your mobile device.
+
+# Install flutter extension on codium(VS code OSS) to run flutter app.
+# From codium, select a emulator(AVD:android virtual device) to run the app.
+# You can create as many as AVDs as you want using command "avdmanager create" . 
+# ./avdmanager list avd
+
+ 
+
+# you can also run android application from command-line(cmd) 
+# https://developer.android.com/studio/build/building-cmdline 
+
+
+
+
+
+
+
