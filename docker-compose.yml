@@ -36,6 +36,13 @@ services:   #https://www.bezkoder.com/docker-mern/
       - $HOME/.Xauthority:$HOME/.Xauthority:ro
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
 
+  dart:
+    image: ${DART_IMAGE}
+    command: ["tail", "-F", "anything"]
+    container_name: ${DART_SERVICE_NAME}
+    volumes:
+      - $HOME:$DART_CONTAINER_HOME
+  
   apache:
     image: ${APACHE_IMAGE}
     container_name: ${APACHE_SERVICE_NAME}
@@ -122,7 +129,6 @@ services:   #https://www.bezkoder.com/docker-mern/
       - ./config_files/git/resolv.conf:/etc/resolv.conf
       - ./config_files/git/.gitconfig:/root/.gitconfig
       - $HOME/.ssh:/root/.ssh
-    network_mode: host
 
 volumes:
   mariadb-data:
