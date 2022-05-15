@@ -1,6 +1,7 @@
 # setup your Android Development Environment, without Android Studio.
 # https://docs.flutter.dev/get-started/install/linux
 
+# https://www.geeksforgeeks.org/how-to-update-gradle-in-android-studio/
 # this setup worked with openjdk:11, but failed with openjdk:17
 # openjdk:17 and gradel-6.7 version has compatibality issue
 
